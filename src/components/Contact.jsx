@@ -4,7 +4,6 @@ import React, { useState } from "react";
  * Contact section: left portrait, right form, floating "Hi" badge.
  * Basic client-side validation + accessible labels.
  */
-
 export default function Contact() {
   const [form, setForm] = useState({
     name: "",
@@ -29,7 +28,8 @@ export default function Contact() {
   }
 
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+    <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center py-24 px-4 sm:px-6 lg:px-8">
+      {/* Portrait */}
       <div className="lg:col-span-5 flex justify-start">
         <div className="relative w-full max-w-xs">
           <div className="rounded-2xl overflow-hidden shadow-lg">
@@ -40,7 +40,7 @@ export default function Contact() {
             />
           </div>
 
-          {/* floating Hi badge */}
+          {/* Floating Hi badge */}
           <div className="absolute -left-6 -bottom-6">
             <div className="w-20 h-20 rounded-full bg-primaryPurple flex items-center justify-center shadow-md">
               <span className="text-white font-medium text-lg">Hi</span>
@@ -49,6 +49,7 @@ export default function Contact() {
         </div>
       </div>
 
+      {/* Contact Form */}
       <div className="lg:col-span-7">
         <h3 className="font-display text-4xl md:text-5xl tracking-tight mb-4">LET'S WORK TOGETHER</h3>
         <p className="text-gray-600 max-w-2xl mb-8">
@@ -86,7 +87,7 @@ export default function Contact() {
           </div>
 
           <div>
-            <label className="text-sm text-primaryPurple block mb-2" htmlFor="service">Service Needed ?</label>
+            <label className="text-sm text-primaryPurple block mb-2" htmlFor="service">Service Needed?</label>
             <select
               id="service"
               name="service"
@@ -100,7 +101,7 @@ export default function Contact() {
           </div>
 
           <div>
-            <label className="text-sm text-primaryPurple block mb-2" htmlFor="message">What Can I Help You...</label>
+            <label className="text-sm text-primaryPurple block mb-2" htmlFor="message">What Can I Help You With?</label>
             <textarea
               id="message"
               name="message"
@@ -114,7 +115,7 @@ export default function Contact() {
           <div>
             <button
               type="submit"
-              className="inline-flex items-center gap-3 px-8 py-3 rounded-full border-2 border-primaryPurple text-primaryPurple font-semibold"
+              className="inline-flex items-center gap-3 px-8 py-3 rounded-full border-2 border-primaryPurple text-primaryPurple font-semibold hover:bg-primaryPurple hover:text-white transition-all duration-300"
               aria-busy={submitted}
             >
               {submitted ? "Sending..." : "SUBMIT"}

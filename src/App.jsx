@@ -20,7 +20,6 @@ function App() {
       <HeroSection />
       <Services/>
       <About/>
-      <Testimonials/>
       <FAQ/>
       <Articles/>
       <Contact/>

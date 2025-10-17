@@ -1,45 +1,40 @@
 import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-/**
- * Simple accordion item used by Services and FAQ.
- * Props:
- *  - title: string
- *  - index: number (optional)
- *  - open: boolean
- *  - onToggle: () => void
- *  - children: content when expanded
- */
-export default function AccordionItem({ title, index, open, onToggle, children }) {
+export default function AccordionItem({ index, title, children, open, onToggle }) {
   return (
-    <div className="border-b last:border-b-0">
+    <div className="border-b border-gray-200 dark:border-gray-700 py-4">
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between py-6 text-left focus:outline-none"
+        className="w-full flex justify-between items-center text-left focus:outline-none"
       >
-        <div className="flex items-center gap-4">
-          {typeof index === "number" && (
-            <span className="text-xl font-medium text-gray-600">{index}.</span>
-          )}
-          <span className="text-lg md:text-xl font-semibold tracking-wide">{title}</span>
-        </div>
-        <div className="text-2xl text-gray-400 transform transition-transform" aria-hidden>
-          <svg
-            className={`w-6 h-6 ${open ? "rotate-180" : "rotate-0"}`}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-          </svg>
-        </div>
+        <span className="text-lg font-semibold text-gray-800 dark:text-white hover:text-blue-600 transition-colors">
+          {title}
+        </span>
+        <motion.span
+          animate={{ rotate: open ? 45 : 0 }}
+          transition={{ duration: 0.3 }}
+          className="text-blue-600 text-2xl font-bold"
+        >
+          +
+        </motion.span>
       </button>
 
-      <div
-        className={`overflow-hidden transition-all duration-300 ${open ? "max-h-80 py-4" : "max-h-0"}`}
-      >
-        <div className="text-gray-600">{children}</div>
-      </div>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden mt-2"
+          >
+            <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-base pl-1">
+              {children}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
